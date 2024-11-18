@@ -1,0 +1,100 @@
+<div class="card bg-secondary">
+    <div class="card-header">
+        Daily Reward Prize
+    </div>
+    <form class="formDailyReward" autocomplete="off">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="card-body">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-10">
+
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="day1">Day 1</span>
+                                <input type="text" class="form-control" placeholder="Prize">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="day2">Day 2</span>
+                                <input type="text" class="form-control" placeholder="Prize">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="day3">Day 3</span>
+                                <input type="text" class="form-control" placeholder="Prize">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="day4">Day 4</span>
+                                <input type="text" class="form-control" placeholder="Prize">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="day5">Day 5</span>
+                                <input type="text" class="form-control" placeholder="Prize">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="day6">Day 6</span>
+                                <input type="text" class="form-control" placeholder="Prize">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="day7">Day 7</span>
+                                <input type="text" class="form-control" placeholder="Prize">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-body-secondary">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(".formDailyReward").on('submit', function (e) {
+        e.preventDefault()
+        $.ajax({
+            url: '/daily_rewardNew',
+            type: 'post',
+            dataType: 'json',
+            data: $(this).serialize(),
+            beforeSend: function () { },
+            success: function (response) {
+                if (response.error) {
+                    if (response.error.Username) {
+                        $("#errUsername").html(response.error.Username)
+                        $("#username").addClass('is-invalid')
+                    } else {
+                        $("#errUsername").html('')
+                        $("#username").removeClass('is-invalid')
+                    }
+                    if (response.error.Password) {
+                        $("#errPassword").html(response.error.Password)
+                        $("#password").addClass('is-invalid')
+                    } else {
+                        $("#errPassword").html('')
+                        $("#password").removeClass('is-invalid')
+                    }
+                } else {
+                    window.location.href = response.redirect
+                }
+            },
+            error: function (a, b, c) {
+                alert(c)
+            }
+        })
+    })
+</script>
+<% scripts=`<script>
+
+    </script>` %>

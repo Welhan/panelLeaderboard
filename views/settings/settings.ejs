@@ -1,0 +1,86 @@
+<form class="formSetting" enctype="multipart/form-data" action="/save-setting" method="post">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <div class="card bg-secondary">
+        <div class="card-header bg-primary text-white">Settings</div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="image">Upload Logo</label>
+                    <input type="file" class="form-control" name="image" id="image" required>
+                </div>
+            </div>
+            <div class="row mb-3    x">
+                <div class="col">
+                    <label for="websiteName">Website Name</label>
+                    <input type="text" class="form-control" name="websiteName" id="websiteName" required>
+                </div>
+                <div class="col">
+                    <label for="websiteURL">Website URL</label>
+                    <input type="text" class="form-control" name="websiteURL" id="websiteURL" required>
+                </div>
+                <div class="col">
+                    <label for="telegramURL">Telegram URL</label>
+                    <input type="text" class="form-control" name="telegramURL" id="telegramURL">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="TOBronze">Turn Over Bronze</label>
+                    <input type="text" class="form-control" name="TOBronze" id="TOBronze">
+                </div>
+                <div class="col">
+                    <label for="TOSilver">Turn Over Silver</label>
+                    <input type="text" class="form-control" name="TOSilver" id="TOSilver">
+                </div>
+                <div class="col">
+                    <label for="TOGold">Turn Over Gold</label>
+                    <input type="text" class="form-control" name="TOGold" id="TOGold">
+                </div>
+                <div class="col">
+                    <label for="TOPlatinum">Turn Over Platinum</label>
+                    <input type="text" class="form-control" name="TOPlatinum" id="TOPlatinum">
+                </div>
+                <div class="col">
+                    <label for="TODiamond">Turn Over Diamond</label>
+                    <input type="text" class="form-control" name="TODiamond" id="TODiamond">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-end">
+            <button type="submit" class="btn btn-primary">Save Data</button>
+        </div>
+    </div>
+</form>
+<% scripts=`%>
+    <!-- <script>
+        $(document).ready(function () {
+            $(".formSetting").on('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                formData.append('_csrf', '<%= csrfToken %>')
+                $.ajax({
+                    url: '/save-setting',
+                    type: 'POST',
+                    dataType: 'json',
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    beforeSend: function () {
+                        $(".formSetting button[type='submit']").prop('disabled', true).text('Saving...');
+                    },
+                    success: function (response) {
+                        alert('Data saved successfully!');
+                        console.log(response);
+                    },
+                    error: function (xhr, status, error) {
+                        const errorMessage = xhr.responseJSON?.message || 'An error occurred. Please try again.';
+                        alert(errorMessage);
+                    },
+                    complete: function () {
+                        $(".formSetting button[type='submit']").prop('disabled', false).text('Save Data');
+                    }
+                });
+            });
+        });
+    </script> -->
+    <%` %>
